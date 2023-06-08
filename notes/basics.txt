@@ -1,0 +1,164 @@
+Most of my notes are written inline inside the .ts files
+These are just small snippets from when I was learning the basics of TypeScript
+
+
+
+variables are born with their types
+############
+declaration
+
+	let number = 6;
+			here it infers that type = number
+
+literal : 
+	const number = 6;
+			bc its const we know its immutable it gets a literal type
+			with the value of 6
+			
+
+
+
+type annotation:
+		let endTime : Date
+		if we dont give it a type it automatically infers any;
+
+
+typescript isnt a replacement for unit tests
+but it enables you to shift your focus from micro to macro
+you dont have to test what it returns etc and you can test the whole program
+
+#################
+object types
+
+
+function printCar(car : {
+	make: string
+	model: string
+	year : number
+}) {
+	console.log(`${car.make} .................`);
+}
+
+
+const car = {
+	make: string
+	model: string
+	year : number
+	chargeVoltage? : number
+}
+
+
+chargeVoltage? same as number |undefined  <-- | means or 
+but not really, u still need to pass chargeVoltage : undefined in the second case
+
+
+
+
+const car = {
+	make: string
+	model: string
+	year : number
+	chargeVoltage : number | undefined
+}
+
+here you either have ti give it a type or undefined
+this is never an optional property
+##########
+
+
+
+excess property checking
+
+
+const car = {
+	make: string
+	model: string
+	year : number
+	chargeVoltage : number | undefined
+}
+
+
+printCar({
+	....
+	color: "RED", 
+}); <-- EXCESS PROPERTY ERROR!!!
+
+
+###################
+
+index signature
+
+
+const phones : {
+	[k: string]: {
+		country: string
+		area: string
+		number: string
+	} | undefined
+} = {};
+phones.fax <-- would have a country,area,number assuming its not undefined
+
+######################################
+Array types
+
+
+
+const fileExtensions : string[] = ["js", "ts"]
+#################
+tuples
+
+let myCar = [2002, "Toyota", "Corolla"]  <-- (string | number)[] <--an array with a type of string or number, not what we r looking for here
+const [year,make,model] = myCar;
+let myCar : [number, string, string] = [ 2002, "toyota", "corolla"] <- tuple type, what we need here.
+
+
+
+dangerous:
+
+const numPair : [number, number ] = [4,5]
+its a tuple but nothing prevents u from using it as an array.
+
+numPair.push(6) <-- sadly we dont have safeguards for this as of now
+
+
+
+########
+type checking : answering a question to type equivalence
+comparison
+
+
+-----------------------------
+STATIC VS DYNAMICALLY TYPED
+
+static: type equivalence checking performed at compile time
+dynamic: type equivalence evaulation at runtime
+
+
+-----------------------------
+NOMINAL VS STRUCTURAL:
+nominal:  did my class come out of a constructor named Car?
+			everything is about the name of your class
+structural: nominal wont fit existing javascript code, structural just cares about structure or shape
+
+
+--------------------------
+duck typed -> if it looks like a duck swims like a duck it probably is a duck
+				no concern whether u came out of a class or u are an object literal
+				as long as u have what is needed its fine
+------------
+
+strong vs weak types
+strong they mean static
+weak they mean dynamic
+but no consensus
+
+###########################################
+
+
+
+
+
+
+
+
+
